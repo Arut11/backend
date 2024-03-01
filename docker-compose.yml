@@ -1,0 +1,24 @@
+version: '3'
+services:
+  backend:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - DB_HOST=database
+      - DB_PORT=5432
+      - DB_USER=habrpguser
+      - DB_PASS=123456
+      - DB_NAME=habrdb
+    depends_on:
+      - database
+
+  database:
+    container_name: habr-pg-13
+    image: "postgres:13.3"
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=habrpguser
+      - POSTGRES_PASSWORD=123456
+      - POSTGRES_DB=habrdb
